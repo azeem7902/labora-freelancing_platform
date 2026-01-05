@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+   <html lang="en" bbai-tooltip-injected="true">
       {/* Adding min-h-screen ensures the background color covers the whole page */}
       <body className="min-h-screen antialiased">{children}</body>
     </html>
