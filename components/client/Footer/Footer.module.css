@@ -1,0 +1,168 @@
+/* Footer.module.css */
+
+.footer {
+  width: 100%;
+  background: #f8f9fa;
+  border-top: 1px solid #e2e8f0;
+  padding: 40px 32px;
+  box-sizing: border-box;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.brand {
+  flex: 0 0 auto;
+  min-width: 250px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2ecc71;
+  margin: 0 0 10px 0;
+}
+
+.description {
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
+  font-size: 0.95rem;
+  max-width: 300px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  flex: 1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list li {
+  color: #64748b;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.list li:hover {
+  color: #2ecc71;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .footer {
+    padding: 35px 28px;
+  }
+
+  .grid {
+    gap: 20px;
+  }
+
+  .content {
+    gap: 20px;
+  }
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .columnTitle {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px 20px;
+  }
+
+  .content {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .brand {
+    min-width: 100%;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 0.85rem;
+    max-width: 100%;
+  }
+
+  .columnTitle {
+    font-size: 0.85rem;
+  }
+
+  .list li {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 20px 15px;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+
+  .columnTitle {
+    font-size: 0.8rem;
+  }
+
+  .list li {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,100 @@
+.footer {
+  width: 100%;
+  background: #f8f9fa;
+  border-top: 1px solid #e2e8f0;
+  /* Matches the padding of your main dashboard content */
+  padding: 40px 32px; 
+  box-sizing: border-box;
+ 
+}
+
+.container {
+  width: 100%;
+  margin: 0; /* Remove auto margins to keep it aligned with sidebar */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+}
+
+.brand {
+  flex: 1;
+  min-width: 250px;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  /* Use direct hex if variables aren't loading */
+  color: #2ecc71; 
+  margin: 0 0 10px 0;
+}
+
+.description {
+  color: #64748b;
+  margin: 0;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.grid {
+  display: grid;
+  /* Ensures columns take up equal space */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+  gap: 30px;
+  flex: 2; /* Gives more room for links to spread out */
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.columnTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.list li {
+  color: #64748b;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+
+.list li:hover {
+  color: #2ecc71;
+}
+
+/* Desktop Alignment */
+@media (min-width: 1024px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* Pushes the link grid to the far right */
+    margin-left: auto; 
+    max-width: 900px;
+  }
+}

@@ -1,0 +1,103 @@
+/* FreelancerPage.module.css */
+
+.layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  background-color: white;
+  min-height: 0;
+}
+
+.contentColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  background-color: white;
+}
+
+.scrollArea {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: white;
+}
+
+/* Scrollbar styling */
+.scrollArea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollArea::-webkit-scrollbar-track {
+  background: white;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+.scrollArea::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Footer - Full width at bottom */
+.footerWrapper {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-top: 1px solid #e2e8f0;
+  flex-shrink: 0;
+}
+
+.footerInner {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+/* Hide scrollbar utility */
+.noScrollbar::-webkit-scrollbar { 
+  display: none; 
+}
+
+.noScrollbar { 
+  -ms-overflow-style: none; 
+  scrollbar-width: none; 
+}
+
+/* Card styles with hover effect */
+.card {
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: #3b82f6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .contentColumn {
+    min-height: 0;
+  }
+
+  .scrollArea {
+    min-height: 0;
+  }
+
+  .card {
+    margin-bottom: 12px; /* Add spacing between cards on mobile */
+  }
+}

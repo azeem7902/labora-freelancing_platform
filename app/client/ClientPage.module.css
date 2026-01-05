@@ -1,0 +1,521 @@
+/* ========================================
+   UNIFIED LAYOUT SYSTEM - GRID BASED
+======================================== */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+}
+
+@media (min-width: 768px) {
+  .layout {
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 1fr auto;
+  }
+}
+
+/* ========================================
+   SIDEBAR - MOBILE OVERLAY + DESKTOP STATIC
+======================================== */
+
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  background: var(--sidebar-bg);
+  border-right: 1px solid #e2e8f0;
+  z-index: 50;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  margin-bottom:30px;
+}
+
+.sidebar.sidebarOpen {
+  transform: translateX(0);
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: static;
+    transform: translateX(0);
+    height: auto;
+    box-shadow: none;
+    border-right: 1px solid #e2e8f0;
+    grid-column: 1;
+    grid-row: 1;
+    overflow: visible;
+  }
+}
+
+/* ========================================
+   BACKDROP - MOBILE ONLY
+======================================== */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 40;
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (min-width: 768px) {
+  .backdrop {
+    display: none;
+  }
+}
+
+/* ========================================
+   CONTENT COLUMN - Header + Main
+======================================== */
+
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .contentColumn {
+    grid-column: 2;
+    grid-row: 1;
+    min-height: auto;
+  }
+}
+
+/* ========================================
+   PAGE CONTENT - Main scrollable area
+======================================== */
+
+.pageContent {
+  flex: 1;
+  padding: clamp(20px, 4vw, 40px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1280px) {
+  .pageContent {
+    padding: 40px 60px;
+  }
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+  width: 100%;
+  grid-column: 1 / -1;
+  grid-row: 2;
+}
+
+/* ========================================
+   HERO SECTION
+======================================== */
+
+.hero {
+  background: linear-gradient(90deg, var(--primary-green) 0%, var(--dark-green) 100%);
+  border-radius: 15px;
+  padding: clamp(25px, 5vw, 40px);
+  color: white;
+  margin-bottom: clamp(20px, 4vw, 40px);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heroTitle {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.heroText {
+  max-width: 100%;
+  margin-bottom: clamp(15px, 3vw, 25px);
+  opacity: 0.9;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.btnPostJob {
+  background: white;
+  color: var(--dark-green);
+  border: none;
+  padding: clamp(10px, 2vw, 12px) clamp(20px, 4vw, 24px);
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  transition: all 0.2s;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btnPostJob:hover {
+  background: #e8e8e8;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ========================================
+   STATS SECTION
+======================================== */
+
+.statsSection {
+  margin-bottom: clamp(30px, 5vw, 40px);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(15px, 2vw, 20px);
+}
+
+.statCard {
+  background: white;
+  padding: clamp(15px, 3vw, 20px);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.statIcon {
+  width: 40px;
+  height: 40px;
+  background: #e6fffa;
+  border-radius: 8px;
+  margin: 0 auto 15px;
+}
+
+.statCount {
+  font-size: clamp(1.5rem, 4vw, 1.8rem);
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-dark);
+}
+
+.statSub {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin: 0;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #bdc3c7;
+  margin-top: 5px;
+}
+
+/* ========================================
+   SECTIONS
+======================================== */
+
+.jobsSection,
+.servicesSection {
+  margin-bottom: clamp(30px, 5vw, 40px);
+}
+
+.servicesSection {
+  margin-bottom: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-dark);
+}
+
+.linkViewAll {
+  color: var(--primary-green);
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.linkViewAll:hover {
+  color: var(--dark-green);
+  text-decoration: underline;
+}
+
+.jobsGrid,
+.servicesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(15px, 2vw, 20px);
+}
+
+/* ========================================
+   JOB CARDS
+======================================== */
+
+.jobCard {
+  background: white;
+  padding: clamp(15px, 3vw, 20px);
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.jobCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--primary-green);
+}
+
+.jobHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.jobTitle {
+  background: #e6fffa;
+  color: #2ecc71;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  word-break: break-word;
+}
+
+.jobBudget {
+  font-weight: bold;
+  font-size: clamp(0.875rem, 2vw, 1rem);
+  text-align: center;
+}
+
+.jobRole {
+  margin-bottom: 10px;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.jobStatus {
+  font-size: 0.8rem;
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+.jobMeta {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: #a0aec0;
+  margin-bottom: 15px;
+  gap: 5px;
+}
+
+.jobActions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btnView,
+.btnManage {
+  flex: 1;
+  min-width: 80px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btnView {
+  background: #2ecc71;
+  color: white;
+  border: none;
+}
+
+.btnView:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+}
+
+.btnManage {
+  background: transparent;
+  color: #2ecc71;
+  border: 1px solid #2ecc71;
+}
+
+.btnManage:hover {
+  background: #e6fffa;
+}
+
+/* ========================================
+   SERVICE CARDS
+======================================== */
+
+.serviceCard {
+  background: white;
+  padding: clamp(20px, 4vw, 30px);
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s;
+}
+
+.serviceCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.serviceIcon {
+  width: 60px;
+  height: 60px;
+  background: #e6fffa;
+  border-radius: 50%;
+  margin: 0 auto 20px;
+}
+
+.serviceTitle {
+  margin-bottom: 10px;
+  font-size: clamp(0.875rem, 2.5vw, 1rem);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.3;
+}
+
+.serviceDesc {
+  font-size: 0.85rem;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.btnHire {
+  background: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.875rem;
+  min-height: 44px;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.btnHire:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+======================================== */
+
+@media (min-width: 640px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jobsGrid,
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .jobHeader {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .jobTitle {
+    width: auto;
+    text-align: left;
+  }
+
+  .jobBudget {
+    text-align: right;
+  }
+}
+
+
+@media (min-width: 768px) {
+  .pageContent {
+    padding: 30px 40px;
+  }
+
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .jobsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .servicesGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .pageContent {
+    padding: 40px 60px;
+  }
+}

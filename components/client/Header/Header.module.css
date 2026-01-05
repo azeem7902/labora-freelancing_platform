@@ -1,0 +1,168 @@
+.header {
+  padding: clamp(15px, 3vw, 20px) clamp(15px, 3vw, 40px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  position: relative;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e2e8f0;
+  background: white;
+}
+
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  transition: color 0.2s;
+}
+
+.hamburger:hover {
+  color: var(--primary-green);
+}
+
+@media (max-width: 767px) {
+  .hamburger {
+    display: flex;
+    order: -1;
+  }
+
+  .welcomeSub {
+    display: none;
+  }
+}
+
+.welcome {
+  flex: 1;
+  min-width: 150px;
+}
+
+.welcomeTitle {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: var(--text-dark);
+  margin: 0 0 2px 0;
+  font-weight: 600;
+}
+
+.welcomeSub {
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
+  color: var(--text-light);
+  margin: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 2vw, 20px);
+  flex: 0 1 auto;
+}
+
+.searchBar {
+  display: none;
+  align-items: center;
+  background: white;
+  padding: 8px 15px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  gap: 8px;
+  flex: 0 1 200px;
+}
+
+.searchBar input {
+  border: none;
+  outline: none;
+  color: var(--text-dark);
+  width: 100%;
+  font-size: 0.875rem;
+  background: transparent;
+}
+
+.searchBar input::placeholder {
+  color: var(--text-light);
+}
+
+@media (min-width: 768px) {
+  .searchBar {
+    display: flex;
+  }
+}
+
+.profileContainer {
+  position: relative;
+  cursor: pointer;
+}
+
+.profileIcon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-green);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.profileIcon:hover {
+  box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+  transform: scale(1.05);
+}
+
+.profileDropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 150px;
+  z-index: 100;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profileDropdown ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profileDropdown li {
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+  color: var(--text-dark);
+}
+
+.profileDropdown li:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.profileDropdown li:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.profileDropdown li:hover {
+  background: #f5f5f5;
+  padding-left: 18px;
+}
