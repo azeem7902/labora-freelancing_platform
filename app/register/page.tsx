@@ -1,6 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useRouter } from "next/navigation";
+
 import { 
   Briefcase, 
   Laptop, 
@@ -12,12 +15,39 @@ import {
 } from 'lucide-react';
 
 export default function RegisterPage() {
-  // State for Role Selection
+  const router = useRouter();
+
   const [role, setRole] = useState<'client' | 'freelancer'>('client');
-  
-  // State for Password Visibility
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [email, setEmail] = useState('');
+
+  type usertype={
+    username:string,
+    password:string,
+    last_name:string,
+    email:string,
+    role:string     
+  }
+
+  let data:usertype ={
+    "username": username,
+    "password": password,
+    "last_name": fullName,
+    "email": email,
+    "role": role
+  };
+
+  
+    async function SubmitData(){
+      let response= await axios.post("http://127.0.0.1:8000/api/register/",data);
+      console.log(response.data);
+      router.push('/login');
+
+    }
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 md:p-8">
@@ -79,13 +109,15 @@ export default function RegisterPage() {
                   type="text" 
                   placeholder="Enter username" 
                   className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
+                  onChange={(e)=>setUsername(e.target.value)}
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-sm font-semibold text-slate-700">Full Name</label>
+                <label className="text-sm font-semibold text-slate-700">Last Name</label>
                 <input 
                   type="text" 
                   placeholder="Enter full name" 
+                  onChange={(e)=>setFullName(e.target.value)}
                   className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                 />
               </div>
@@ -97,6 +129,7 @@ export default function RegisterPage() {
               <input 
                 type="email" 
                 placeholder="Enter email address" 
+                  onChange={(e)=>setEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
               />
             </div>
@@ -109,6 +142,7 @@ export default function RegisterPage() {
                   <input 
                     type={showPassword ? "text" : "password"} 
                     placeholder="Create password" 
+                      onChange={(e)=>setPassword(e.target.value)}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none transition"
                   />
                   <button 
@@ -184,8 +218,8 @@ export default function RegisterPage() {
             </div>
 
             {/* Submit Button */}
-            <button className="w-full bg-[#22c55e] hover:bg-green-600 text-white font-bold py-4 rounded-2xl transition duration-300 shadow-lg shadow-green-100 flex items-center justify-center gap-2">
-              <UserPlus size={20} />
+            <button onClick={SubmitData} className="w-full bg-[#22c55e] hover:bg-green-600 text-white font-bold py-4 rounded-2xl transition duration-300 shadow-lg shadow-green-100 flex items-center justify-center gap-2">
+              <UserPlus size={20}  />
               Create Account
             </button>
 

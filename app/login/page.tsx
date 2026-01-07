@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState } from 'react';
 import { 
   Handshake, 
@@ -13,9 +12,58 @@ import {
   Smartphone,
   ArrowRight
 } from 'lucide-react';
+import axios from 'axios';
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState("");
+
+
+
+  type usertype={
+    username:string,
+    password:string,
+   
+  }
+
+  let data:usertype ={
+    "username": username,
+    "password": password,
+ 
+  };
+
+async function SubmitData(e: React.FormEvent) {
+  e.preventDefault();
+
+  if (!username.trim() || !password.trim()) {
+    alert("Please enter both username and password");
+    return;
+  }
+
+  try {
+    console.log("hello worldd..................")
+    const response = await axios.post(
+      "http://localhost:3000/api/login/",
+      data,
+      { withCredentials: true }
+    );
+
+    console.log(response.data);
+
+    if (response.data.role === "client") {
+      router.push("/client");
+    } else if (response.data.role === "freelancer") {
+      router.push("/freelancer");
+    }
+  } catch (err) {
+    console.error("Login failed:", err);
+  }
+}
+
 
   return (
     <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
@@ -84,17 +132,19 @@ export default function LoginPage() {
             </p>
           </div>
 
-          <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+          <form className="space-y-6" onSubmit={SubmitData}>
             {/* Email Field */}
             <div className="space-y-2">
-              <label className="block text-sm font-semibold text-slate-700">Email or Username</label>
+              <label className="block text-sm font-semibold text-slate-700">Email or  Username</label>
               <div className="relative group">
+
                 <span className="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-[#22c55e] transition-colors">
                   <Mail size={18} />
                 </span>
                 <input 
                   type="text" 
                   placeholder="Enter your email" 
+                      onChange={(e)=>setUsername(e.target.value)}
                   className="w-full pl-11 pr-4 py-3.5 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-green-500/20 focus:border-[#22c55e] outline-none transition-all"
                 />
               </div>
@@ -111,6 +161,7 @@ export default function LoginPage() {
                   type={showPassword ? "text" : "password"} 
                   placeholder="••••••••" 
                   className="w-full pl-11 pr-12 py-3.5 border border-slate-200 rounded-2xl focus:ring-2 focus:ring-green-500/20 focus:border-[#22c55e] outline-none transition-all"
+                  onChange={(e)=>setPassword(e.target.value)}
                 />
                 <button 
                   type="button" 
@@ -132,10 +183,20 @@ export default function LoginPage() {
             </div>
 
             {/* Sign In Button */}
-            <button className="w-full bg-[#22c55e] hover:bg-green-600 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-green-100 flex items-center justify-center gap-2 active:scale-[0.98]">
-              Sign In
-              <ArrowRight size={18} />
-            </button>
+          <button 
+  type='submit' 
+  disabled={!username.trim() || !password.trim()}
+  className={`w-full py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-lg shadow-green-100
+    ${!username.trim() || !password.trim()
+      ? "bg-slate-300 cursor-not-allowed"
+      : "bg-[#22c55e] hover:bg-green-600 text-white active:scale-[0.98]"
+    }`
+  }
+>
+  Sign In
+  <ArrowRight size={18} />
+</button>
+
 
             {/* Divider */}
             <div className="relative flex items-center py-2">
